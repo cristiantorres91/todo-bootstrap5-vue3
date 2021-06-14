@@ -1,21 +1,19 @@
 <template>
   <Header />
-<div class="container">
-<AddTask @addTask="addTask"/>
-  <Tasks :tasks="tasks" @editTask="editTask" @deleteTask="deleteTask"/>
-</div>
+  <div class="container">
+    <AddTask @addTask="addTask" />
+    <Tasks :tasks="tasks" @editTask="editTask" @deleteTask="deleteTask" />
+  </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import Tasks from '@/components/Tasks.vue';
-import AddTask from '@/components/AddTask.vue';
+import Header from "@/components/Header.vue";
+import Tasks from "@/components/Tasks.vue";
+import AddTask from "@/components/AddTask.vue";
 import { onMounted, ref } from "vue";
 
-
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
     Tasks,
@@ -25,47 +23,47 @@ export default {
   setup() {
     const tasks = ref([]);
 
-      onMounted (() =>{
-        let dataLocalStorage = JSON.parse(localStorage.getItem('tasks'))
-        if(dataLocalStorage === null){
-          tasks.value = [];
-        }else{
-          tasks.value = dataLocalStorage;
-        }
+    onMounted(() => {
+      let dataLocalStorage = JSON.parse(localStorage.getItem("tasks"));
+      if (dataLocalStorage === null) {
+        tasks.value = [];
+      } else {
+        tasks.value = dataLocalStorage;
+      }
+    });
 
-      });
-
-    const addTask = (task) => {
-      tasks.value.push(
-        {
-          name: task.name,
-          done: task.done,
-        }
-      );
-      console.log(tasks.value);
+    const updateLocalStorage = () => {
       localStorage.setItem("tasks", JSON.stringify(tasks.value));
     };
 
-    const editTask = (index) =>{
+    const addTask = (task) => {
+      tasks.value.push({
+        name: task.name,
+        done: task.done,
+      });
+      console.log(tasks.value);
+      updateLocalStorage();
+    };
+
+    const editTask = (index) => {
       tasks.value[index].done = true;
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      updateLocalStorage();
     };
 
     const deleteTask = (index) => {
       tasks.value.splice(index, 1);
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      updateLocalStorage();
     };
 
     return {
+      updateLocalStorage,
       tasks,
       addTask,
       editTask,
-      deleteTask
+      deleteTask,
     };
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
