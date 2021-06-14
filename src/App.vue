@@ -1,10 +1,6 @@
 <template>
   <Header />
 <div class="container">
-<!-- <div class="input-group my-4">
-  <input type="text" class="form-control" placeholder="Runner" v-model="newTask" @keyup.enter="addTask" >
-  <button class="btn btn-secondary" type="button" @click="addTask" >Add</button>
-</div> -->
 <AddTask @addTask="addTask"/>
   <Tasks :tasks="tasks" @editTask="editTask" @deleteTask="deleteTask"/>
 </div>

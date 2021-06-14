@@ -1,6 +1,6 @@
 <template>
     <h4 className="bg-primary text-white text-center p-4">
-        Todo App
+        Todo App - Cristian Torres
     </h4>
 </template>
 
