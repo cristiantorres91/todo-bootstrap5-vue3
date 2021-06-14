@@ -7,8 +7,8 @@
       v-model="task"
       @keyup.enter="addTask"
     />
-    <button class="btn btn-secondary" type="button" @click="addTask">
-      Add
+    <button class="btn btn-primary" type="button" @click="addTask">
+<i class="bi bi-plus-lg"></i> 
     </button>
   </div>
 </template>
